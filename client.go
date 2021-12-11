@@ -105,6 +105,10 @@ func (c *Client) CreateUpload(u *Upload) (*Uploader, error) {
 			newUrl.Scheme = baseUrl.Scheme
 			url = newUrl.String()
 		}
+		if newUrl.Host == "" {
+			newUrl.Host = baseUrl.Host
+			url = newUrl.String()
+		}
 
 		if c.Config.Resume {
 			c.Config.Store.Set(u.Fingerprint, url)
